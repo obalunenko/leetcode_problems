@@ -22,26 +22,20 @@ func uniqueMorseRepresentations(words []string) int {
 	vocabulary = initVocabulary(morseList, alphabetList)
 
 	// make map of translated words
-	var uniqueTranslations []string
+	uniqueTranslations := make(map[string]int)
 	for _, word := range words {
-		//fmt.Printf("Word: %s\n", word)
-		translation := ""
+
+		var translation string
+
 		for _, letter := range word {
-			//fmt.Printf(" - letter [%s] -> [ %s ]\n", string(letter), vocabulary[string(letter)])
 
 			translation += vocabulary[string(letter)]
 
 		}
-		notSeenBefore := true
 		// find notUnique words
-		for _, seenTranslation := range uniqueTranslations {
-			if translation == seenTranslation {
-				notSeenBefore = false
-			}
-		}
-		if notSeenBefore {
-			uniqueTranslations = append(uniqueTranslations, translation)
-			//fmt.Printf("Unique: %s\n", translated)
+		_, ok := uniqueTranslations[translation]
+		if !ok {
+			uniqueTranslations[translation] = 1
 		}
 
 	}
