@@ -1,4 +1,4 @@
-771. Jewels and Stones
+771 Jewels and Stones
 https://leetcode.com/problems/jewels-and-stones/description/
 
 You're given strings J representing the types of stones that are jewels, and S representing the stones you have.
