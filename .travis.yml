@@ -24,4 +24,3 @@ jobs:
         - echo "Run unit tests..."
         - go vet $(go list ./...)
         - go test -v -race $(go list ./...)
-        - golangci-lint run
