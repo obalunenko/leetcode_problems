@@ -1,0 +1,27 @@
+language: go
+dist: trusty
+sudo: false
+install: true
+env:
+  global:
+    - MYAPP=leetcode_problems
+    - MYEMAIL=oleg.balunenko@gmail.com
+    - GOPROXY=https://gocenter.io
+
+jobs:
+  include:
+    - stage: Unit Tests, Vet
+      go:
+        - 1.13.x
+      os:
+        - linux
+      install:
+        - go mod tidy -v
+        - curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b $(go env GOPATH)/bin
+
+
+      script:
+        - echo "Run unit tests..."
+        - go vet $(go list ./...)
+        - go test -v -race $(go list ./...)
+        - golangci-lint run

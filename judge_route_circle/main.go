@@ -1,4 +1,4 @@
-package judge_route_circle
+package main
 
 import (
 	"fmt"
@@ -16,26 +16,21 @@ type Position struct {
 
 func (r *Robot) moveRight() {
 	r.position.y++
-
 }
 
 func (r *Robot) moveLeft() {
 	r.position.y--
-
 }
 
 func (r *Robot) moveUp() {
 	r.position.x++
-
 }
 
 func (r *Robot) moveDown() {
 	r.position.x--
-
 }
 
 func (r *Robot) Move(moves string) {
-
 	for _, step := range moves {
 		switch strings.ToUpper(string(step)) {
 		case "R":
@@ -50,11 +45,9 @@ func (r *Robot) Move(moves string) {
 			fmt.Printf("Wrong movement!")
 		}
 	}
-
 }
 
-func judgeCircle(moves string) (result bool) {
-
+func judgeCircle(moves string) bool {
 	robot := Robot{
 		position: Position{
 			x: 0,
@@ -63,9 +56,10 @@ func judgeCircle(moves string) (result bool) {
 	}
 
 	robot.Move(moves)
-	if robot.position.x == 0 && robot.position.y == 0 {
-		result = true
-	}
-	return result
 
+	if robot.position.x == 0 && robot.position.y == 0 {
+		return true
+	}
+
+	return false
 }

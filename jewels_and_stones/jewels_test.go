@@ -1,76 +1,67 @@
-package jewels_and_stones
+package main
 
 import (
 	"fmt"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
-type TestCase struct {
-	id             int
-	description    string
-	input          Input
-	expectedResult int
-}
-
-type Input struct {
-	jewels string
-	stones string
-}
-
-type TestSuite []TestCase
-
-var ts = TestSuite{
-	TestCase{
-		id:          1,
-		description: "One Jewel - lowercase",
-		input: Input{
-			jewels: "a",
-			stones: "AzalkK",
-		},
-		expectedResult: 1,
-	},
-	TestCase{
-		id:          2,
-		description: "3 Jewels - lowercase + uppercase",
-		input: Input{
-			jewels: "aA",
-			stones: "aAAbbbb",
-		},
-		expectedResult: 3,
-	},
-	TestCase{
-		id:          3,
-		description: "Empty Jewels",
-		input: Input{
-			jewels: "",
-			stones: "aAAsdsdaK",
-		},
-		expectedResult: 0,
-	},
-	TestCase{
-		id:          4,
-		description: "Empty stones",
-		input: Input{
-			jewels: "aA",
-			stones: "",
-		},
-		expectedResult: 0,
-	},
-}
-
 func TestJewels(t *testing.T) {
-
-	for _, tc := range ts {
-		t.Run(fmt.Sprintf("Test%d", tc.id), func(t *testing.T) {
-
-			actualResult := numJewelsInStones(tc.input.jewels, tc.input.stones)
-
-			if actualResult != tc.expectedResult {
-				fmt.Printf(" - Got: %d\n - Expected: %d\n", actualResult, tc.expectedResult)
-				t.Fail()
-			}
-
-		})
+	type args struct {
+		jewels string
+		stones string
 	}
 
+	var tests = []struct {
+		id             int
+		description    string
+		input          args
+		expectedResult int
+	}{
+		{
+			id:          1,
+			description: "One Jewel - lowercase",
+			input: args{
+				jewels: "a",
+				stones: "AzalkK",
+			},
+			expectedResult: 1,
+		},
+		{
+			id:          2,
+			description: "3 Jewels - lowercase + uppercase",
+			input: args{
+				jewels: "aA",
+				stones: "aAAbbbb",
+			},
+			expectedResult: 3,
+		},
+		{
+			id:          3,
+			description: "Empty Jewels",
+			input: args{
+				jewels: "",
+				stones: "aAAsdsdaK",
+			},
+			expectedResult: 0,
+		},
+		{
+			id:          4,
+			description: "Empty stones",
+			input: args{
+				jewels: "aA",
+				stones: "",
+			},
+			expectedResult: 0,
+		},
+	}
+
+	for _, tc := range tests {
+		tc := tc
+		t.Run(fmt.Sprintf("Test%d", tc.id), func(t *testing.T) {
+			actualResult := numJewelsInStones(tc.input.jewels, tc.input.stones)
+			assert.Equal(t, tc.expectedResult, actualResult)
+		})
+	}
 }
