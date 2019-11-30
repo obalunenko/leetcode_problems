@@ -1,36 +1,35 @@
-package main
+package judgecircle
 
 import (
-	"fmt"
 	"strings"
 )
 
-type Robot struct {
-	position Position
+type robot struct {
+	position position
 }
 
-type Position struct {
+type position struct {
 	x int
 	y int
 }
 
-func (r *Robot) moveRight() {
+func (r *robot) moveRight() {
 	r.position.y++
 }
 
-func (r *Robot) moveLeft() {
+func (r *robot) moveLeft() {
 	r.position.y--
 }
 
-func (r *Robot) moveUp() {
+func (r *robot) moveUp() {
 	r.position.x++
 }
 
-func (r *Robot) moveDown() {
+func (r *robot) moveDown() {
 	r.position.x--
 }
 
-func (r *Robot) Move(moves string) {
+func (r *robot) move(moves string) {
 	for _, step := range moves {
 		switch strings.ToUpper(string(step)) {
 		case "R":
@@ -41,23 +40,21 @@ func (r *Robot) Move(moves string) {
 			r.moveUp()
 		case "D":
 			r.moveDown()
-		default:
-			fmt.Printf("Wrong movement!")
 		}
 	}
 }
 
 func judgeCircle(moves string) bool {
-	robot := Robot{
-		position: Position{
+	r := robot{
+		position: position{
 			x: 0,
 			y: 0,
 		},
 	}
 
-	robot.Move(moves)
+	r.move(moves)
 
-	if robot.position.x == 0 && robot.position.y == 0 {
+	if r.position.x == 0 && r.position.y == 0 {
 		return true
 	}
 
