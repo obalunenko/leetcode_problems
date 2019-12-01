@@ -44,7 +44,7 @@ func Test_twoSum(t *testing.T) {
 		{
 			name: "no target sum",
 			args: args{
-				nums:   []int{9,2,99},
+				nums:   []int{9, 2, 99},
 				target: 1000,
 			},
 			want: nil,
@@ -52,10 +52,10 @@ func Test_twoSum(t *testing.T) {
 		{
 			name: "3,2,4",
 			args: args{
-				nums:   []int{3,2,4},
+				nums:   []int{3, 2, 4},
 				target: 6,
 			},
-			want: []int{1,2},
+			want: []int{1, 2},
 		},
 	}
 
